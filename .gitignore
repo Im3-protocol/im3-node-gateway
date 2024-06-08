@@ -1,0 +1,8 @@
+# Ignore node_modules folder
+node_modules/
+
+# Add other files and directories you want to ignore
+# For example:
+# .env
+# dist/
+# *.log
