@@ -8,8 +8,9 @@ const db = new sqlite3.Database(':memory:', (err) => {
 });
 
 db.serialize(() => {
-  db.run("CREATE TABLE meetings (id INTEGER PRIMARY KEY AUTOINCREMENT, room_name TEXT, url TEXT)");
-  db.run("CREATE TABLE tokens (id INTEGER PRIMARY KEY AUTOINCREMENT, token TEXT, room_name TEXT)");
+  db.run("CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT)");
+  db.run("CREATE TABLE meetings (id INTEGER PRIMARY KEY AUTOINCREMENT, room_name TEXT, url TEXT, admin TEXT, created_at TEXT)");
+  db.run("CREATE TABLE tokens (id INTEGER PRIMARY KEY AUTOINCREMENT, token TEXT, room_name TEXT, username TEXT)");
 });
 
 export default db;
