@@ -7,7 +7,7 @@ im3 is a decentralized streaming platform that leverages LiveKit as its infrastr
 ```plaintext
 livekit-gateway/
 ├── db/
-│   └── db.mjs
+│   └── redisClient.mjs
 ├── routes/
 │   └── meetings.mjs
 │   └── tokens.mjs
