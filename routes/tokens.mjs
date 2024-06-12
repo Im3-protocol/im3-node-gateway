@@ -9,7 +9,7 @@ router.post('/join-meeting', async (req, res) => {
   const { url, username } = req.body;
 
   try {
-    const roomName = await redisClient.hGet(url, 'room_name');
+    const roomName = url.split('/').pop();
     const roomData = await redisClient.hGetAll(roomName);
 
     if (!roomData) {

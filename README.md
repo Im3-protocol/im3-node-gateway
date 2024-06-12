@@ -11,6 +11,8 @@ livekit-gateway/
 ├── routes/
 │   └── meetings.mjs
 │   └── tokens.mjs
+├── utils/
+│   └── hashRoomName.mjs
 ├── config/
 │   └── config.mjs
 ├── .gitignore
