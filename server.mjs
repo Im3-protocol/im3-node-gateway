@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import meetingsRouter from './routes/meetings.mjs';
 import tokensRouter from './routes/tokens.mjs';
+import demoRouter from './routes/demo.mjs'; // Add this line
 
 const app = express();
 
