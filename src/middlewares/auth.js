@@ -11,6 +11,7 @@ const auth = () => async (req, res, next) => {
     if (wallet === zeroAddress) {
       req.wallet = wallet.toLowerCase();
       resolve(true);
+      return;
     }
     const signature = req.header('sig');
     if (!signature) reject(new ApiError(httpStatus.FORBIDDEN, 'Sign data with your wallet'));

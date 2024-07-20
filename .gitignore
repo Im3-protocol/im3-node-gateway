@@ -12,3 +12,5 @@ yarn-error.log
 coverage
 
 .idea
+
+test.js
