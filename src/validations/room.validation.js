@@ -12,6 +12,7 @@ const createToken = {
     participantName: Joi.string().required(),
     roomName: Joi.string().required(),
     wallet: Joi.string().required(),
+    identity: Joi.string().required(),
   }),
 };
 

@@ -20,9 +20,9 @@ const createRoom = catchAsync(async (req, res) => {
 });
 
 const createToken = catchAsync(async (req, res) => {
-  const { roomName, participantName } = req.body;
-  if (req.wallet !== participantName.toLowerCase()) throw new ApiError(httpStatus.FORBIDDEN, 'Invalid participant name');
-  const token = await roomService.createToken(roomName, participantName);
+  const { roomName, participantName, identity } = req.body;
+  if (req.wallet !== identity.toLowerCase()) throw new ApiError(httpStatus.FORBIDDEN, 'Invalid participant name');
+  const token = await roomService.createToken(roomName, participantName, identity.toLowerCase());
   res.send(token);
 });
 
@@ -55,14 +55,18 @@ const webhook = catchAsync(async (req, res) => {
         const newEvent = new Event(event);
         newEvent.eventId = event.id;
         await newEvent.save();
-        logger.info(`${event.participant.identity} joined with room: ${event.room.name}`);
+        logger.info(
+          `${event.participant.name} with identity: ${event.participant.identity} joined with room: ${event.room.name}`,
+        );
         break;
       }
       case 'participant_left': {
         const newEvent = new Event(event);
         newEvent.eventId = event.id;
         await newEvent.save();
-        logger.info(`${event.participant.identity} left the room: ${event.room.name}`);
+        logger.info(
+          `${event.participant.name} with identity: ${event.participant.identity} left the room: ${event.room.name}`,
+        );
         break;
       }
       default:

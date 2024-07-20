@@ -20,10 +20,11 @@ const createRoom = async () => {
   return roomService_.createRoom(opts);
 };
 
-const createToken = async (roomName, participantName) => {
+const createToken = async (roomName, participantName, identity) => {
   const { AccessToken } = await livekit();
   const at = new AccessToken(config.im3.apiKey, config.im3.apiSecret, {
-    identity: participantName,
+    name: participantName,
+    identity,
     // Token to expire after 10 minutes
     ttl: '10m',
   });
