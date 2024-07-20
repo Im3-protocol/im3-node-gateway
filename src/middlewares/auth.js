@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const { isAddress } = require('viem');
+const { zeroAddress } = require('viem');
 const ApiError = require('../utils/ApiError');
 const logger = require('../config/logger');
 const { recoverSigner } = require('../utils/recoverSig');
@@ -7,6 +8,10 @@ const { recoverSigner } = require('../utils/recoverSig');
 const auth = () => async (req, res, next) => {
   return new Promise((resolve, reject) => {
     const { wallet } = req.body;
+    if (wallet === zeroAddress) {
+      req.wallet = wallet.toLowerCase();
+      resolve(true);
+    }
     const signature = req.header('sig');
     if (!signature) reject(new ApiError(httpStatus.FORBIDDEN, 'Sign data with your wallet'));
     recoverSigner(signature)

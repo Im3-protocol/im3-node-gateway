@@ -21,7 +21,7 @@ const createRoom = catchAsync(async (req, res) => {
 
 const createToken = catchAsync(async (req, res) => {
   const { roomName, participantName, identity } = req.body;
-  if (req.wallet !== identity.toLowerCase()) throw new ApiError(httpStatus.FORBIDDEN, 'Invalid participant name');
+  if (req.wallet !== identity.toLowerCase()) throw new ApiError(httpStatus.FORBIDDEN, 'Invalid identity address');
   const token = await roomService.createToken(roomName, participantName, identity.toLowerCase());
   res.send(token);
 });
