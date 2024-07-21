@@ -1,4 +1,5 @@
 const { v4 } = require('uuid');
+const { isAddress } = require('viem');
 const livekit = require('../utils/esmHelper');
 const config = require('../config/config');
 
@@ -22,8 +23,11 @@ const createRoom = async () => {
 
 const createToken = async (roomName, participantName, identity) => {
   const { AccessToken } = await livekit();
+  const userName = isAddress(identity)
+    ? `${participantName}-${identity.slice(0, 6)}...${identity.slice(-6)}`
+    : `${participantName}`;
   const at = new AccessToken(config.im3.apiKey, config.im3.apiSecret, {
-    name: participantName,
+    name: userName,
     identity,
     // Token to expire after 10 minutes
     ttl: '10m',
